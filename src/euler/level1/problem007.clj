@@ -1,25 +1,15 @@
 (ns euler.level1.problem007
  (:require [clojure.math.numeric-tower :as math]))
 
+;(defn prime? [n]
+; (zero? (count (filter #(true? %) (map #(= 0 (mod n %) ) (range 1 (inc n)))))))
+
+(defn non-divisible? [n div]
+ (not (= 0 (mod n div))))
+
 (defn prime? [n]
- (loop [n n
-        k 1]
-  (if (<= (- (* 6 k) 1) (Math/floor (math/sqrt n)))
-   (cond
-    (= 0 (mod n (+ 1 (* 6 k)))) false
-    (= 0 (mod n (- 1 (* 6 k)))) false
-    :default (recur n (inc k))
-    )
-   (cond
-    (<= n 3) true
-    (= 0 (mod n 2)) false
-    (= 0 (mod n 3)) false
-    :default n
-    )
-   )
-  )
- )
+ (= 0 (count (filter #(false? (non-divisible? n %))  (range 2 (inc (int (Math/sqrt n))))))))
 
 (defn euler-7 [n]
- (nth (drop 2(filter prime? (range 1e9))) (dec 10001))
+ (nth (filter #(prime? %) (drop 2 (range))) (dec n))
  )

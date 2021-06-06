@@ -1,23 +1,28 @@
 (ns euler.level1.problem007-spec
-  (:require
-    [speclj.core :refer :all]
-    [euler.level1.problem007 :refer :all]))
+ (:require
+  [speclj.core :refer :all]
+  [euler.level1.problem007 :refer :all]))
 
 ; https://projecteuler.net/problem=7
 
-(describe "Euler Problem #7"
-  (it "Checks if number is prime"
-    (should= false (prime? 6))
-    (should= true (prime? 2))
-    (should= true (prime? 3))
-    (should= false (prime? 192))
-    (should= 29 (prime? 29))
-    (should= true (prime? 1)) ;;1 is not prime...
-    )
+(describe "euler 7"
 
-  (it "Solves #7"
-    (should= 104743 (euler-7 -1))
-     )
+ (it "check if n is not divisble"
+  (should (non-divisible? 3 2))
+  (should-not (non-divisible? 4 2))
+  (should (non-divisible? 4 3))
   )
+ (it "checks if n is prime"
+       (should (prime? 2))
+       (should-not (prime? 4))
+       )
+ (it "solve euler 7"
+       (should= 2 (euler-7 1))
+       (should= 5 (euler-7 3))
+       (should= 7927 (euler-7 1001))
+       (should= 104743 (euler-7 10001))
+       )
+
+ )
 
 (run-specs)
